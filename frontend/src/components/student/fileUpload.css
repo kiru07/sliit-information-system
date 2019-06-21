@@ -1,0 +1,16 @@
+.button{
+    color: white;
+    background-color: blue;
+    padding: 15px;
+    width: 100px;
+}
+
+.assignmentId{
+    width: 300px;
+    margin: 15px;
+}
+
+.fileInput{
+    width: 300px;
+    margin: 15px;
+}

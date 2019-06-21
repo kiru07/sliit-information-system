@@ -27,6 +27,14 @@ router.get('/get/:id', (req,res) => {
         .catch((err) => res.status(400).send({"message":err}))
 });
 
+// Get an admin details using GET method
+// http://localhost:4000/api/admin/get/ + regId
+router.get('/get/:regId', (req,res) => {
+    Admin.find({'regId':req.params.regId})
+        .then((admin) => res.status(200).send({"message":"Successfully retrived","data":admin}))
+        .catch((err) => res.status(400).send({"message":err}))
+});
+
 // Update an admin details using PUT method
 // http://localhost:4000/api/admin/update + id
 router.put('/update/:id', (req,res) => {
