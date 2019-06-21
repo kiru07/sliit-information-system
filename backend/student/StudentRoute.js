@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Student = require('../models/Student')
+const StudentController = require("../student/StudentController");
 
-//Add student detailsnpm install 
+//Add student details
+//http://localhost:4000/api/student/add
 router.post('/add', (req, res) => {
     const student =  new Student(req.body);
     student.save()
@@ -63,4 +65,16 @@ router.post('/upload/:id', (req, res) => {
         res.json({file: `public/${req.body.filename}.pdf`});
       });
 })
+
+//Student joining the course
+router.put('/join-course/:id', (req,res) => {
+    //Use the controller method
+    StudentController.updateCourseList(req.params.id, req.body.courseId)
+        .then( student => {
+            res.status(200).send({"message":"Sucuessfully joined the course", "data":student})
+        }).catch( err => {
+            res.status(400).send({err});
+        })
+})
+
 module.exports = router;

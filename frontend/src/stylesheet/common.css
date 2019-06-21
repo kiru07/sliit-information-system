@@ -1,0 +1,82 @@
+.font {
+    font-family:"Quicksand";
+}
+
+.sign-button {
+    font-family:"Quicksand";
+    position: relative;
+    float: right;
+    margin-left: 1450px;
+}
+
+.logout-button {
+    font-family:"Quicksand";
+    float: right;
+    margin-left:1450px;
+}
+
+.form {
+    width: 600px;
+    margin-top: 100px;
+}
+
+.home-image {
+    position: relative;
+    float: left;
+    width: 1000px;
+    height: 550px;
+    margin-left: -50px;
+    margin-top: 10px;
+}
+
+.login-form {
+    float: right;
+    margin-top: 50px;
+    margin-right: 180px;
+}
+
+.login {
+    width: 430px;
+    background-color:#1877f2;
+    border-radius: 3px;
+}
+
+.nav-top-bar {
+    background-color: #1daaf2;
+}
+
+.home-text {
+    position: relative;
+    font-family: 'Playfair Display', serif;
+    font-size: 50px;
+    margin-top: 40px;
+    margin-left: 150px;
+}
+
+.user-id {
+    color: white;
+    font-family:"Quicksand";
+    margin-left: 1300px;
+}
+
+.nav-row {
+    position: relative;
+    display: flex;
+}
+
+.vertical-center {
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.table-head {
+    background-color: #1daaf2;
+    color: white;
+}
+
+.table-main {
+    position: relative;
+    margin-top: 40px;
+}

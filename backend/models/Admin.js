@@ -30,9 +30,12 @@ var Admin = new schema({
         type:String,
         required:true
     },
-    dateOfBirth:{
-        type:Date,
+    gender:{
+        type:String,
         required:true
+    },
+    dateOfBirth:{
+        type:Date
     }
 })
 

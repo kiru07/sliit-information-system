@@ -8,31 +8,46 @@ router.post('/add', (req,res) => {
     const admin = new Admin(req.body);
     admin.save()
         .then(() => res.status(200).send({"message":"Successfully added admin"}))
-        .catch((err) => res.status(400).send({"message":err}))
+        .catch((err) => {res.status(400).send({"message":err})
+    console.log(err)})
 });
 
 // Get admins details using GET method
 // http://localhost:4000/api/admin/get
 router.get('/get', (req,res) => {
     Admin.find()
-        .then((admin) => res.status(200).send({"message":"Successfully retrived","data":admin}))
-        .catch((err) => res.status(400).send({"message":err}))
+        .then((admin) => {
+            if(!admin.length){
+                res.status(400).send({"message":"error"});
+            } else{
+                res.status(200).json(admin).send({"message":"Successfully retrived","data":admin});
+            }
 });
 
 // Get an admin details using GET method
 // http://localhost:4000/api/admin/get/ + id
 router.get('/get/:id', (req,res) => {
     Admin.findById(req.params.id)
-        .then((admin) => res.status(200).send({"message":"Successfully retrived","data":admin}))
-        .catch((err) => res.status(400).send({"message":err}))
+        .then((admin) => {
+            if(!admin.length){
+                res.status(400).send({"message":"error"});
+            } else{
+                res.status(200).json(admin).send({"message":"Successfully retrived","data":admin});
+            }
+    })
 });
 
 // Get an admin details using GET method
-// http://localhost:4000/api/admin/get/ + regId
-router.get('/get/:regId', (req,res) => {
+// http://localhost:4000/api/admin/getByReg/ + regId
+router.get('/getByReg/:regId', (req,res) => {
     Admin.find({'regId':req.params.regId})
-        .then((admin) => res.status(200).send({"message":"Successfully retrived","data":admin}))
-        .catch((err) => res.status(400).send({"message":err}))
+        .then((admin) => {
+            if(!admin.length){
+                res.status(400).send({"message":"error"});
+            } else{
+                res.status(200).json(admin).send({"message":"Successfully retrived","data":admin});
+            }
+        })
 });
 
 // Update an admin details using PUT method

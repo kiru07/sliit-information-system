@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 const schema = mongoose.Schema
 
-
 var Instructor = new schema({
     regId:{
         type:String,
@@ -31,13 +30,16 @@ var Instructor = new schema({
         type:String,
         required:true
     },
-    dateOfBirth:{
-        type:Date,
+    gender:{
+        type:String,
         required:true
+    },
+    dateOfBirth:{
+        type:Date
     },
     courses:[{
         type:schema.Types.ObjectId,
-        ref: 'Course'
+        ref:'Course'
     }]
 })
 

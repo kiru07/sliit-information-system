@@ -62,4 +62,16 @@ router.delete("/:id", (req, res) => {
     });
 });
 
+// Update Course's accepted instructors list
+// http://localhost:4000/api/courses/:id/acceptedInstructors/:instructorId
+router.put("/:id/acceptedInstructors/:instructorId", (req, res) => {
+  CourseController.updateAcceptedInstructorList(req.params.id, req.params.instructorId)
+    .then(data => {
+      res.status(data.status).json(data);
+    })
+    .catch(err => {
+      res.status(err.status).json(err);
+    });
+});
+
 module.exports = router;

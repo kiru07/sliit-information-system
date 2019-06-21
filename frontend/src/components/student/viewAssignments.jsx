@@ -1,6 +1,8 @@
 import React from 'react'
 import Assignment from './assignment'
 import SubmissionForm from './submissionForm'
+import './viewAssignments.css'
+
 
 class ViewAssignemnts extends React.PureComponent{
     constructor(props){
@@ -11,7 +13,8 @@ class ViewAssignemnts extends React.PureComponent{
     }
 
     componentDidMount(){
-        fetch("http://localhost:4000/api/assignments",{
+
+  /*       fetch("http://localhost:4000/api/assignments",{
             method: 'GET',
         }).then((response) => {
              response.json().then((body) => {
@@ -19,17 +22,17 @@ class ViewAssignemnts extends React.PureComponent{
                     ? this.setState({assignments:body.data})
                     : console.log("View Assignemnts",body);
             }); 
-        });
+        }); */
     }
     
     render(){
         return(
-            <div class="container">
-                <h2>View Assigments page</h2>
+            <div className="container">
+             
                 <div>
-                    {this.state.assignments && this.state.assignments.length > 0 && this.state.assignments.map( (ass) => {
+                    {this.props.assignments && this.props.assignments.length > 0 ? this.props.assignments.map( (ass) => {
                         return(
-                            <div class="card"
+                            <div className="card cardStyles"
                                 key={ass._id}
                                 onClick={() => this.setState({ selectedAssignment:ass })}
                             >
@@ -37,11 +40,14 @@ class ViewAssignemnts extends React.PureComponent{
                                     name={ass.name} 
                                     phone={ass.phone} 
                                 />
+                {this.state.selectedAssignment && this.state.selectedAssignment._id === ass._id &&  <SubmissionForm assignment={this.state.selectedAssignment}/>}
+
                            </div>
                         )
-                    })}
+                    }) 
+                    : <div class="card">No assignments to display</div>
+                }
                 </div>
-                {this.state.selectedAssignment && <SubmissionForm assignment={this.state.selectedAssignment}/>}
             </div>
         )
     }

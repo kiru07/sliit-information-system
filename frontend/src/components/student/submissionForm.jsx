@@ -8,7 +8,7 @@ class SubmissionForm extends React.Component{
                 <div>
                     <h2>Student Assigment Submission</h2>
                 </div>
-                <h2>Upload your assignments here</h2>
+                    <h2>Upload your assignments here</h2>
                 <FileUpload />
             </div>
         )

@@ -1,10 +1,13 @@
 import React from 'react'
 
-const Course = ({code, name}) =>{
+const Course = ({code, name, selectedCourse}) =>{
         return(
             <div>
-                <div>{code}</div>
-                <div>{name}</div>
+                <div className="card-header">{code} - {name}</div>
+                <div 
+                    className="card-body">View Assignmts</div>
+                <div className="card-footer">Footer</div>
+               
             </div>
         )
 }

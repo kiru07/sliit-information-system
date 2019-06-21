@@ -1,5 +1,6 @@
 import React from 'react'
 import Course from './course'
+import './viewCourses.css'
 import ViewAssignemnts from './viewAssignments'
 
 class ViewCourses extends React.PureComponent{
@@ -15,37 +16,40 @@ class ViewCourses extends React.PureComponent{
             method: 'GET',
         }).then((response) => {
              response.json().then((body) => {
-                body.confirmation==="Success"
-                    ? this.setState({courses:body.data})
-                    : console.log("View Assignemnts",body);
+                if(body.confirmation==="Success"){
+                     let availableCourses = body.data.filter(course => {
+                        return course.available
+                    });
+                    this.setState({availableCourses})
+                }
             }); 
         });
     }
     
     render(){
         return(
-            <div class="container">
-                <h2>View Courses page</h2>
+            <div className="container">
+                <h2>Courses</h2>
                 <div>
-                    {this.state.courses && this.state.courses.length > 0 && this.state.courses.map( (course) => {
+                    {this.state.availableCourses && this.state.availableCourses.length > 0 && this.state.availableCourses.map( (course) => {
                         return(
                             <div 
-                                class="card"
+                                className="card cardStyles"
                                 key={course._id}
-                                onClick={ () => {
+                                 onClick={ () => {
                                         this.setState({ selectedCourse:course })
-                                }}
+                                }} 
                             >
                                 <Course 
                                     code={course.code} 
                                     name={course.name} 
-                                    
+                                    selectedCourse={course}
                                 />
+                                {this.state.selectedCourse && this.state.selectedCourse._id === course._id && <ViewAssignemnts  assignments={this.state.selectedCourse.assignments} /> }
                             </div>
                         )
                     })}
                 </div>
-                {this.state.selectedCourse && <ViewAssignemnts selectedCourse={this.state.selectedCourse}/> }
             </div>
         )
     }

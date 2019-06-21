@@ -38,6 +38,12 @@ const CourseSchema = new Schema({
       type: ObjectId,
       ref: "Exam"
     }
+  ],
+  acceptedInstructors: [
+    {
+      type: ObjectId,
+      ref: 'Instructor'
+    }
   ]
 });
 
