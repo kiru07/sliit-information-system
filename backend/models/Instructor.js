@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const schema = mongoose.Schema
 
-var Admin = new schema({
+var Instructor = new schema({
     regId:{
         type:String,
         required:true
@@ -36,7 +36,11 @@ var Admin = new schema({
     },
     dateOfBirth:{
         type:Date
-    }
+    },
+    courses:[{
+        type:schema.Types.ObjectId,
+        ref:'Course'
+    }]
 })
 
-module.exports = mongoose.model('admin',Admin)
+module.exports = mongoose.model('instructor',Instructor)
