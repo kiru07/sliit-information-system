@@ -1,5 +1,5 @@
-import React,{Component} from 'react';
-import {BrowserRouter, Route, Switch, NavLink} from 'react-router-dom'
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom'
 import AdminHome from '../components/admin/AdminHome'
 import AdminAdd from '../components/admin/AdminAdd'
 import AdminView from '../components/admin/AdminView'
@@ -15,8 +15,8 @@ import StudentView from '../components/admin/StudentView';
 export default class AdminRouter extends Component {
 
 
-    render(){
-        return(
+    render() {
+        return (
             <BrowserRouter>
                 <div>
                     <Header />
@@ -35,5 +35,5 @@ export default class AdminRouter extends Component {
             </BrowserRouter>
         )
     }
-    
+
 };
