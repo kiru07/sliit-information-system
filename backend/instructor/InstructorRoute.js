@@ -52,6 +52,18 @@ router.put('/update/:id', (req, res) => {
         .catch((err) => res.status(400).send({ "message": err }))
 });
 
+// Update an admin details using PUT method FOR PASSWORD RESET FUNCTION
+// http://localhost:4000/api/admin/updatePassword + id
+router.put('/updatePassword/:id', (req,res) => {
+    Instructor.updateOne({'_id':req.params.id},req.body)
+        .then((admin) =>{ 
+            console.log(req.body.email, req.body.regId, req.body.password)
+            res.status(200).send({"message":"Successfully updated","data":admin})
+            send_mail.mail(req.body.email, req.body.regId, req.body.password);
+        })
+        .catch((err) => res.status(400).send({"message":err}))
+});
+
 // Delete an instructor details using DELETE method
 // http://localhost:4000/api/instructor/delete + id
 router.delete('/delete/:id', (req, res) => {

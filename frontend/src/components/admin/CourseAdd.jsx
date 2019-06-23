@@ -32,7 +32,7 @@ export default class CourseAdd extends Component{
     }
 
     componentDidMount(){
-        fetch('/api/instructor/get', {method: 'GET'})
+        fetch('/instructor/get', {method: 'GET'})
             .then(res => res.json())
             .then(jsonRes =>  {this.setState({instructors:jsonRes.data}) 
                 console.log(jsonRes)})
@@ -57,9 +57,49 @@ export default class CourseAdd extends Component{
         e.preventDefault();
         const code = this.state.code;
         const name = this.state.name;
-        const available = document.getElementById('available').value;
-        
+        const values = this.state.values;
+        const selectedInstructors=[];
+        var availableBool=false;
+
         console.log(this.state.values)
+
+        if(code == "" || name == "" || values.length < 1 ) {
+            alert("Fill the fields properly");
+        } else {
+            var i;
+            for( i = 0 ; i < values.length ; i++ ) {
+                selectedInstructors.push(values[i]._id);
+            }
+
+            const course = {
+                code:code.toUpperCase(),
+                name:name,
+                available:availableBool,
+                instructors:selectedInstructors
+            }
+
+            console.log(course);
+
+            axios.post("/courses/",course)
+                .then(res => {
+                    alert("Successfully added!")
+                    document.getElementById('code').value = "";
+                    document.getElementById('name').value = "";
+                    document.getElementById('instructor').hintText = "Select an Instructor";
+                    this.setState({
+                        values:[]
+                    })
+                    this.setState({
+                        code:[]
+                    })
+                    this.setState({
+                        name:[]
+                    })
+                })
+                .catch(err => console.log(err))
+        }
+
+
     }
 
     // addInstructors(){
@@ -117,15 +157,9 @@ export default class CourseAdd extends Component{
                                 name="name"/>
                         </div>
                         <div className="input-group mb-3">
-                            <select id="available" className="form-control">
-                                <option>Select a Availability status</option>
-                                <option>Available</option>
-                                <option>Unavailable</option>
-                            </select>
-                        </div>
-                        <div className="input-group mb-3">
                             <MuiThemeProvider>
                                 <SelectField
+                                id="instructor"
                                     multiple={true}
                                     hintText="Select an Instructor"
                                     value={values}

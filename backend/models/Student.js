@@ -21,8 +21,7 @@ const Student = new Schema({
     type: String
   },
   dateOfBirth: {
-    type: Date,
-    required: true
+    type: Date
   },
   address: {
     type: String,

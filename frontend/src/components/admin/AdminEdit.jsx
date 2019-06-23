@@ -6,7 +6,7 @@ import Nav from '../Nav'
 
 
 
-export default class AdminAdd extends Component{
+export default class AdminEdit extends Component{
 
     constructor(props){
         super(props);

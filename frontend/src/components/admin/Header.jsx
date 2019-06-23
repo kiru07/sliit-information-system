@@ -23,10 +23,12 @@ export default class AdminHome extends Component{
                         <NavLink to="/admin/viewAdmin"><button type="submit"  className="linker w3-bar-item w3-button font" >View Administrator</button></NavLink>
                         <h6 class="side-title">Instructor</h6>
                         <NavLink to="/admin/addInstructor"><button type="submit"  className="linker w3-bar-item w3-button font" >Add Instructor</button></NavLink>
-                        {/* <NavLink to="/instructor/viewInstructor"><button type="submit"  className="w3-bar-item w3-button font" >View</button></NavLink> */}
+                        <NavLink to="/admin/viewInstructor"><button type="submit"  className="linker w3-bar-item w3-button font" >View Instructor</button></NavLink>
                         <h6 class="side-title">Student</h6>
+                        <NavLink to="/admin/viewStudent"><button type="submit"  className="linker w3-bar-item w3-button font" >View Student</button></NavLink>
                         <h6 class="side-title">Course</h6>
-                        <NavLink to="/admin/addcourse"><button type="submit"  className="linker w3-bar-item w3-button font" >Add Course</button></NavLink>
+                        <NavLink to="/admin/addCourse"><button type="submit"  className="linker w3-bar-item w3-button font" >Add Course</button></NavLink>
+                        <NavLink to="/admin/viewCourse"><button type="submit"  className="linker w3-bar-item w3-button font" >View Course</button></NavLink>
                         
                     </div>
 

@@ -53,8 +53,49 @@ export default class Signup extends Component{
         const email= this.state.email;
         const address= this.state.address;
         const phone= this.state.phone;
+        const year = document.getElementById('year').value;
+        const semester = document.getElementById('semester').value;
         const password = this.state.password;
         const cPassword= this.state.cPassword;
+
+        if(regNo == "" || name == "" || email == "" || password == "" || cPassword == "" || year == "Select a year" || semester == "Select a semester" || address == "" || phone == "") {
+            alert("Field is empty");
+        } else if(isNaN(phone) || phone.length > 12) {
+            alert("Invalid Phone Number");
+        }  else if(password != cPassword) {
+            alert("Password is not matching");
+        } else {
+            if(regNo.startsWith("sd") || regNo.startsWith("SD") || regNo.startsWith("sD") || regNo.startsWith("Sd")){
+                
+                const student = {
+                    regNumber:regNo.toUpperCase(),
+                    name:name,
+                    email:email,
+                    year:year,
+                    semester:semester,
+                    address:address,
+                    phone:phone,
+                    password:password
+                }
+
+                axios.post("/student/add",student)
+                    .then(res => {
+                        alert("Successfully added!")
+                        document.getElementById('regNo').value = "";
+                        document.getElementById('name').value = "";
+                        document.getElementById('phone').value = "";
+                        document.getElementById('password').value = "";
+                        document.getElementById('cPassword').value = "";
+                        document.getElementById('email').value = "";
+                        document.getElementById('address').value = "";
+                        document.getElementById('year').value = "Select a year";
+                        document.getElementById('semester').value = "Select a semester";
+                    })
+                    .catch(err => console.log(err))
+            } else {
+                alert("Registration Number for the student begins with 'SD' or 'sd' or 'sD' or 'Sd'");                
+            }
+        }
     }
 
     render(){
@@ -123,6 +164,22 @@ export default class Signup extends Component{
                                 placeholder="Contact Number" 
                                 className="form-control" 
                                 name="phone"/>
+                        </div>
+                        <div className="input-group mb-3">
+                            <select id="year" className="form-control">
+                                <option>Select a year</option>
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+                        <div className="input-group mb-3">
+                            <select id="semester" className="form-control">
+                                <option>Select a semester</option>
+                                <option>1</option>
+                                <option>2</option>
+                            </select>
                         </div>
                         <div className="input-group mb-3">
                             <input 

@@ -36,28 +36,53 @@ export default class Login extends Component{
 
             // regNo begins with AD or ST or IN use particular GET to authenticate
             if(regNo.startsWith("A") || regNo.startsWith("a")){
-                axios.get('/admin/getByReg/'+ regNo)
+                axios.get('/admin/getByReg/'+ regNo.toUpperCase())
                     .then(resJson => {
                         console.log(resJson)
                         if(resJson.data[0].password === password) {
                             ReactDOM.render(<AdminRouter/>, document.getElementById('root'));
                         } else {
-                            alert("You have entered an invalid password",this.state.password)
+                            alert("You have entered an invalid Registration ID or password",this.state.password)
                         }
                     })
-                    .catch(err => console.log(err));
+                    .catch(err => {
+                        alert("You have entered an invalid Registration ID or password")
+                        console.log(err)
+                    });
+
             } else if(regNo.startsWith("S") || regNo.startsWith("s")){
-                console.log("Student");
+                axios.get('/student/get/'+ regNo.toUpperCase())
+                    .then(resJson => {
+                        console.log(resJson)
+                        if(resJson.data.data.length) {
+                            if(resJson.data.data[0].password === password) {
+                                ReactDOM.render(<AdminRouter/>, document.getElementById('root'));
+                            } else {
+                                alert("You have entered an invalid Registration ID or password")
+                            }
+                        } else {
+                            alert("You have entered an invalid Registration ID or password")
+                        }
+                    })
+                    .catch(err => {
+                        alert("You have entered an invalid Registration ID or password")
+                        console.log(err)
+                    });
+
             } else if(regNo.startsWith("I") || regNo.startsWith("i")){
-                axios.get('/instructor/getByReg/'+regNo)
+                axios.get('/instructor/getByReg/'+regNo.toUpperCase())
                     .then(resJson => {
                         if(resJson.data[0].password == password) {
                             ReactDOM.render(<AdminHome/>, document.getElementById('root'));
                         } else {
-                            alert("You have entered an invalid password",this.state.password)
+                            alert("You have entered an invalid Registration ID or password")
                         }
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => {
+                        alert("You have entered an invalid Registration ID or password")
+                        console.log(err)
+                    });
+
             } else {
                 alert("Registration number is invalid")
             }
