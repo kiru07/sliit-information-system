@@ -24,7 +24,7 @@ export default class CourseView extends Component{
     }
 
     loadAdminView(){
-        fetch('/api/courses', {method: 'GET'})
+        fetch('/courses', {method: 'GET'})
             .then(res => res.json())
             .then(jsonRes => {console.log(jsonRes.data)
                     this.setState({courses:jsonRes.data}) 
@@ -49,6 +49,7 @@ export default class CourseView extends Component{
                                 <tr>
                                     <th>Code</th>
                                     <th>Name</th>
+                                    <th>Instructor</th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>

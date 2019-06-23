@@ -31,21 +31,21 @@ export default class InstructorEdit extends Component{
         axios.get('/instructor/get/'+this.state.adminId)
             .then(res => {
                 console.log(res)
-                document.getElementById('regNo').value = res.data.regId;
-                document.getElementById('name').value = res.data.name;
-                document.getElementById('phone').value = res.data.phone;
-                document.getElementById('qualification').value = res.data.qualification;
-                document.getElementById('email').value = res.data.email;
-                document.getElementById('address').value = res.data.address;
-                document.getElementById('gender').value = res.data.gender;
+                document.getElementById('regNo').value = res.data.data.regId;
+                document.getElementById('name').value = res.data.data.name;
+                document.getElementById('phone').value = res.data.data.phone;
+                document.getElementById('qualification').value = res.data.data.qualification;
+                document.getElementById('email').value = res.data.data.email;
+                document.getElementById('address').value = res.data.data.address;
+                document.getElementById('gender').value = res.data.data.gender;
 
-                this.state.regNo = res.data.regId;
-                this.state.name = res.data.name;
-                this.state.email = res.data.email;
-                this.state.qualification= res.data.qualification;
-                this.state.address= res.data.address;
-                this.state.phone= res.data.phone;
-                this.state.password = res.data.password;
+                this.state.regNo = res.data.data.regId;
+                this.state.name = res.data.data.name;
+                this.state.email = res.data.data.email;
+                this.state.qualification= res.data.data.qualification;
+                this.state.address= res.data.data.address;
+                this.state.phone= res.data.data.phone;
+                this.state.password = res.data.data.password;
             })
             .catch(err => console.log(err))
     }
@@ -73,7 +73,7 @@ export default class InstructorEdit extends Component{
         } else if(isNaN(phone) || phone.length > 12) {
             alert("Invalid Phone Number");
         } else {
-            if(regNo.startsWith("ad") || regNo.startsWith("AD")){
+            if(regNo.startsWith("in") || regNo.startsWith("IN") || regNo.startsWith("In") || regNo.startsWith("iN")){
                 const admin = {
                     regId:regNo,
                     name:name,
@@ -97,7 +97,7 @@ export default class InstructorEdit extends Component{
                     })
                     .catch(err => console.log(err))
             } else {
-                alert("Registration Number for the administrator begins with 'AD' or 'ad'");                
+                alert("Registration Number for the administrator begins with 'IN' or 'in' or 'In' or 'iN");                
             }
         }
     }
