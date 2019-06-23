@@ -15,6 +15,10 @@ const NotificationSchema = new Schema({
     type: Boolean,
     default: false
   },
+  date: {
+    type: Date,
+    default: new Date()
+  },
   instructorId: {
     // to which instructor this notification is sent
     type: ObjectId,
