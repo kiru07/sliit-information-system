@@ -27,7 +27,7 @@ router.get('/get', (req,res) => {
 router.get('/get/:id', (req,res) => {
     Student.find({"regNumber":req.params.id})
         .then( student  => {
-            res.status(400).send({"message":"Sucuessfully retrieced the student's data", "data":student})
+            res.status(200).send({"message":"Sucuessfully retrieced the student's data", "data":student})
         }).catch( err => {
             res.status(400).send({err});
         })

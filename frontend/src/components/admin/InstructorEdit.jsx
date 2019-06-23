@@ -6,35 +6,51 @@ import Nav from '../Nav'
 
 
 
-export default class InstructorAdd extends Component{
+export default class InstructorEdit extends Component{
 
     constructor(props){
         super(props);
         this.state = {
+          adminId: this.props.match.params.id,  
           regNo:"",
           name:"",
           email:"",
           qualification:"",
           address:"",
-          phone:""
+          phone:"",
+          password:""
         };
 
         this.onValueChange= this.onValueChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.passwordCreator = this.passwordCreator.bind(this);
+        
     }
 
-    passwordCreator = () => {
-        var length           = 10;
-        var result           = '';
-        var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        var charactersLength = characters.length;
-        for ( var i = 0; i < length; i++ ) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        }
-        return result;
+    componentDidMount(){
+        console.log(this.state.adminId)
+        axios.get('/instructor/get/'+this.state.adminId)
+            .then(res => {
+                console.log(res)
+                document.getElementById('regNo').value = res.data.data.regId;
+                document.getElementById('name').value = res.data.data.name;
+                document.getElementById('phone').value = res.data.data.phone;
+                document.getElementById('qualification').value = res.data.data.qualification;
+                document.getElementById('email').value = res.data.data.email;
+                document.getElementById('address').value = res.data.data.address;
+                document.getElementById('gender').value = res.data.data.gender;
+
+                this.state.regNo = res.data.data.regId;
+                this.state.name = res.data.data.name;
+                this.state.email = res.data.data.email;
+                this.state.qualification= res.data.data.qualification;
+                this.state.address= res.data.data.address;
+                this.state.phone= res.data.data.phone;
+                this.state.password = res.data.data.password;
+            })
+            .catch(err => console.log(err))
     }
 
+    
     onValueChange(e){
         this.setState({
             [e.target.name]:e.target.value
@@ -54,23 +70,23 @@ export default class InstructorAdd extends Component{
 
         if(regNo == "" || name == "" || email == "" || qualification == "" || gender == "Select a gender" || address == "" || phone == "") {
             alert("Field is empty");
+        } else if(isNaN(phone) || phone.length > 12) {
+            alert("Invalid Phone Number");
         } else {
-            if(regNo.startsWith("IN") || regNo.startsWith("in")){
-                const password = this.passwordCreator();
-                const instructor = {
-                    regId:regNo.toUpperCase(),
+            if(regNo.startsWith("in") || regNo.startsWith("IN") || regNo.startsWith("In") || regNo.startsWith("iN")){
+                const admin = {
+                    regId:regNo,
                     name:name,
                     email:email,
                     qualification:qualification,
                     gender:gender,
                     address:address,
-                    phone:phone,
-                    password:password,
-                    courses:[]
+                    phone:phone
                 }
-                axios.post("/instructor/add",instructor)
+                console.log(this.state.adminId)
+                axios.put("/instructor/update/"+this.state.adminId,admin)
                     .then(res => {
-                        alert("Successfully added!")
+                        alert("Successfully edited!")
                         document.getElementById('regNo').value = "";
                         document.getElementById('name').value = "";
                         document.getElementById('phone').value = "";
@@ -81,7 +97,7 @@ export default class InstructorAdd extends Component{
                     })
                     .catch(err => console.log(err))
             } else {
-                alert("Registration Number for the instructor begins with 'IN' or 'in'");                
+                alert("Registration Number for the administrator begins with 'IN' or 'in' or 'In' or 'iN");                
             }
         }
     }
@@ -93,7 +109,7 @@ export default class InstructorAdd extends Component{
                 {/* <Nav buttonType="logout"/> */}
 
                 <div className="container form">
-                <h2 className="font text-center">Add Instructor</h2>
+                <h2 className="font text-center">Edit Instructor</h2>
                     <br/>
                     <br/>
                     <form  onSubmit={this.handleSubmit}>
@@ -162,7 +178,7 @@ export default class InstructorAdd extends Component{
                         </div>
                         <br/>
                         <div className="text-center">
-                            <button type="submit"  className="btn btn-success font">Insert</button>
+                            <button type="submit"  className="btn btn-success font">Edit</button>
                         </div>
                     </form>
                 </div>

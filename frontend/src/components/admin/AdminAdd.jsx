@@ -58,10 +58,10 @@ export default class AdminAdd extends Component{
         } else if(isNaN(phone) || phone.length > 12) {
             alert("Invalid Phone Number");
         } else {
-            if(regNo.startsWith("ad") || regNo.startsWith("AD")){
+            if(regNo.startsWith("ad") || regNo.startsWith("AD") || regNo.startsWith("aD") || regNo.startsWith("Ad")){
                 const password = this.passwordCreator();
                 const admin = {
-                    regId:regNo,
+                    regId:regNo.toUpperCase(),
                     name:name,
                     email:email,
                     qualification:qualification,
