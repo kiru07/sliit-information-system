@@ -2,10 +2,9 @@ import React,{Component} from 'react'
 import {BrowserRouter,Route,NavLink} from 'react-router-dom'
 import axios from 'axios'
 import '../../stylesheet/common.css'
-import CourseViewRowCell from './CourseViewRowCell';
 
 
-export default class CourseViewRow extends Component{
+export default class CourseViewRowCell extends Component{
     constructor(props){
         super(props);
         this.state = {
@@ -37,13 +36,7 @@ export default class CourseViewRow extends Component{
     render(){
         return(
             <tr>
-                <td>{this.state.instructor.code}</td>
                 <td>{this.state.instructor.name}</td>
-                <td>{this.state.instructor.instructors.map((cou)=>{
-                  console.log(cou)
-                    return <CourseViewRowCell key={cou._id} instructor={cou} loadAdminView={this.loadAdminView} viewEditForm={this.viewEditForm}/>
-                })}</td>
-                <td><button id="delete" name={this.state.instructor.regId} type="button" class="btn btn-danger" onClick={this.deleteAdmin}>Delete</button></td>
             </tr>
         )
     }

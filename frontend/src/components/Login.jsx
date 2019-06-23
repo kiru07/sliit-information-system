@@ -45,7 +45,10 @@ export default class Login extends Component{
                             alert("You have entered an invalid Registration ID or password",this.state.password)
                         }
                     })
-                    .catch(err => console.log(err));
+                    .catch(err => {
+                        alert("You have entered an invalid Registration ID or password")
+                        console.log(err)
+                    });
 
             } else if(regNo.startsWith("S") || regNo.startsWith("s")){
                 axios.get('/student/get/'+ regNo.toUpperCase())
@@ -75,7 +78,11 @@ export default class Login extends Component{
                             alert("You have entered an invalid Registration ID or password")
                         }
                     })
-                    .catch(err => console.log(err))
+                    .catch(err => {
+                        alert("You have entered an invalid Registration ID or password")
+                        console.log(err)
+                    });
+
             } else {
                 alert("Registration number is invalid")
             }
